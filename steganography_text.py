@@ -9,7 +9,6 @@ from PIL import Image
 
 #---------- HELPFUL FUNCTIONS ----------#
 
-
 def add_leadingzero(byte):
     """
     Adding leading zeros to a given byte. Python removes the leading zeros by default,
@@ -80,7 +79,6 @@ def encodeMessage(message):
     return binaryMessage, len(binaryMessage)
 
 #---------- MAIN FUNCTIONS ----------#
-
 
 def encryptMessage(messsage, original_imagePATH, encrypted_imagePATH, initial_colorCode, step_size):
     """
@@ -230,16 +228,17 @@ def run_decryption(encrypted_imagePATH, initial_colorCode=(0, 0), step_size=1):
 secret_message = 'In the Middle of this Nowhere'
 
 # Full or relative path of the original image
-original_imagePATH = r'Steganography\image.jpg'
+original_imagePATH = 'image.jpg'
 
 # Full or relative path of the image, in which the message is hidden
-encrypted_imagePATH = r'Steganography\encoded_image.png'
+# Note that .jpg does not work as the path of the encrypted image
+encrypted_imagePATH = 'encoded_image.png'
 
 # The initial position of the color code that the encryption starts. Defaults to (0,0)
-initial_colorCode = (99, 77)
+initial_colorCode = (3, 7)
 
 # Each bit of the message is encrypted with a given step size. Defaults to 1
-step_size = 120
+step_size = 64
 
 
 #---------- RUNNING THE PROGRAM ----------#
