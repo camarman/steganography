@@ -1,18 +1,15 @@
-# Implementing a Steganography Machine that can encrypt and decrypt messages.
-# I have included two new features; initial_colorCode and step_size to improve the encryption
-
 from math import floor
-from time import sleep
 
 import numpy as np
 from PIL import Image
 
-#---------- HELPFUL FUNCTIONS ----------#
 
-def add_leadingzero(byte):
+# ---------- HELPFUL FUNCTIONS ----------
+
+def add_leading_zero(byte):
     """
-    Adding leading zeros to a given byte. Python removes the leading zeros by default,
-    whereas each byte should consist of 8 bits.
+    Adding leading zeros to a given byte. Python removes the
+    leading zeros by default, whereas each byte should consist of 8 bits.
     """
     while len(byte) != 8:
         byte = '0' + byte
@@ -20,7 +17,7 @@ def add_leadingzero(byte):
 
 
 def colorByte(colorCode):
-    return add_leadingzero(bin(colorCode)[2:])
+    return add_leading_zero(bin(colorCode)[2:])
 
 
 def format_pixels(pixelValues):
@@ -49,7 +46,7 @@ def get_pixels(imagePATH):
     Returns the pixel values of a given image.
 
     Args:
-        imagePATH [str]: The path of the image (It can also be a relative path)
+        imagePATH [str]: The path of the image (It can be a relative path)
     """
     im = Image.open(imagePATH)
     pixelValues = list(im.getdata())
@@ -59,16 +56,16 @@ def get_pixels(imagePATH):
 
 def encodeMessage(message):
     """
-    Turning the message into binary code with a unique adjustment. This adjustment is necessary
-    to decrypt the image.
+    Turning the message into binary code with a unique adjustment.
+    This adjustment is necessary to decrypt the image.
 
     Args:
-        messsage [str]: The message provided by the user
+        message [str]: The message provided by the user
     """
     binaryMessage = ''
     for i in range(len(message)):
         current_char = message[i]
-        binaryMessage += add_leadingzero(bin(ord(current_char))[2:])
+        binaryMessage += add_leading_zero(bin(ord(current_char))[2:])
         try:
             # If the next character exists in the message, put a marker, '0'
             next_char = message[i+1]
@@ -78,26 +75,27 @@ def encodeMessage(message):
     # Note that this length is not equal to len(message) * 8
     return binaryMessage, len(binaryMessage)
 
-#---------- MAIN FUNCTIONS ----------#
 
-def encryptMessage(messsage, original_imagePATH, encrypted_imagePATH, initial_colorCode, step_size):
+# ---------- MAIN FUNCTIONS ----------
+
+def encryptMessage(message, original_imagePATH, encrypted_imagePATH, initial_colorCode, step_size):
     """
     Encrypting the message into an image.
 
     Args:
-        messsage [str]: The message provided by the user
+        message [str]: The message provided by the user
         original_imagePATH [str]: The path of the original image
         (It can also be a relative path)
         encrypted_imagePATH [str]: The path of the image, in which the message is hidden
         (It can also be a relative path)
         initial_colorCode [list]: The initial point, where the encryption starts. It takes two values
         (x, y) that represents the location of the point. Note that x>=0 and y>=0
-        step_size [int]: Each bit in the message is encrypted in a color byte with a distace,
+        step_size [int]: Each bit in the message is encrypted in a color byte with a distance,
         given by the step size
     """
     # Obtaining/Defining some important parameters
     width, height = image_size(original_imagePATH)
-    binaryMessage, binaryMessageLength = encodeMessage(messsage)
+    binaryMessage, binaryMessageLength = encodeMessage(message)
     org_colorCodeValues = format_pixels(get_pixels(original_imagePATH))
     enc_colorCodeValues = org_colorCodeValues.copy()
     initial_colorCode_loc = initial_colorCode[0] * initial_colorCode[1]
@@ -127,7 +125,7 @@ def decryptMessage(encrypted_imagePATH, initial_colorCode, step_size):
         (It can also be a relative path)
         initial_colorCode [list]: The initial point, where the encryption starts. It takes two values
         (x, y) that represents the location of the point. Note that x>=0 and y>=0
-        step_size [int]: Each bit in the message is encrypted in a color byte with a distace,
+        step_size [int]: Each bit in the message is encrypted in a color byte with a distance,
         given by the step size
     """
     enc_colorCodeValues = format_pixels(get_pixels(encrypted_imagePATH))
@@ -153,43 +151,38 @@ def decryptMessage(encrypted_imagePATH, initial_colorCode, step_size):
                                 for i in binaryMessage.split(',')])
     return decrypted_message
 
-#---------- RUNING FUNCTIONS ----------#
 
+# ---------- RUNNING FUNCTIONS ----------
 
 def run_encryption(message, original_imagePATH, encrypted_imagePATH, initial_colorCode=(0, 0), step_size=1):
     """
     The main function that runs the encryption process.
 
     Args:
-        messsage [str]: The message provided by the user
+        message [str]: The message provided by the user
         original_imagePATH [str]: The path of the original image
         (It can also be a relative path)
         encrypted_imagePATH [str]: The path of the image, in which the message is hidden
         (It can also be a relative path)
         initial_colorCode [tuple, optional]: The initial point, where the encryption starts. It takes two values
         (x, y) that represents the location of the point. Note that x>=0 and y>=0. Defaults to (0, 0)
-        step_size [int, optional]: Each bit in the message is encrypted in a color byte with a distace,
+        step_size [int, optional]: Each bit in the message is encrypted in a color byte with a distance,
         given by the step size. Defaults to 1
     """
-    pixelnum = image_size(original_imagePATH)[
+    pixel_num = image_size(original_imagePATH)[
         0] * image_size(original_imagePATH)[1]
-    max_char_num = floor(pixelnum / 3)
+    max_char_num = floor(pixel_num / 3)
     messageLength = len(message)
 
-    print('Welcome to Steganography Encryption Machine')
-    print('------------------------')
-    print('Pixel number: {}'.format(pixelnum))
-    sleep(1)
+    print('Starting Steganography Encryption Process...')
+    print('-'*10)
+    print('Pixel number: {}'.format(pixel_num))
     print('Maximum characters/bytes that can be stored in the image: {}'.format(max_char_num))
-    sleep(1)
     print('Length of the message: {}'.format(messageLength))
-    sleep(1)
-    print('------------------------')
-    print('Starting the encryption process...')
-    sleep(2)
+    print('-'*10)
     encryptMessage(message, original_imagePATH,
                    encrypted_imagePATH, initial_colorCode, step_size)
-    print('Encryption is successful')
+    print('Encryption is successful!')
 
 
 def run_decryption(encrypted_imagePATH, initial_colorCode=(0, 0), step_size=1):
@@ -197,53 +190,21 @@ def run_decryption(encrypted_imagePATH, initial_colorCode=(0, 0), step_size=1):
     The main function that runs the decryption process.
 
     Args:
-        messsage [str]: The message provided by the user
+        message [str]: The message provided by the user
         encrypted_imagePATH [str]: The path of the image, in which the message is hidden
         (It can also be a relative path)
         initial_colorCode [tuple, optional]: The initial point, where the encryption starts. It takes two values
         (x, y) that represents the location of the point. Note that x>=0 and y>=0. Defaults to (0, 0)
-        step_size [int, optional]: Each bit in the message is encrypted in a color byte with a distace,
+        step_size [int, optional]: Each bit in the message is encrypted in a color byte with a distance,
         given by the step size. Defaults to 1
     """
-    pixelnum = image_size(original_imagePATH)[
-        0] * image_size(original_imagePATH)[1]
-    max_char_num = floor(pixelnum / 3)
-
-    print('Welcome to Steganography Decryption Machine')
-    print('------------------------')
-    print('Pixel number: {}'.format(pixelnum))
-    sleep(1)
-    print('Maximum characters/bytes that can be stored in the image: {}'.format(max_char_num))
-    sleep(1)
-    print('------------------------')
-    print('Starting the decryption process...')
-    sleep(2)
-    print('Decryption is successful. Printing the result...')
-    print(decryptMessage(encrypted_imagePATH, initial_colorCode, step_size))
-
-#---------- INPUTS ----------#
-
-
-# The message that needs to be encrypted
-secret_message = 'In the Middle of this Nowhere'
-
-# Full or relative path of the original image
-original_imagePATH = 'image.jpg'
-
-# Full or relative path of the image, in which the message is hidden
-# Note that .jpg does not work as the path of the encrypted image
-encrypted_imagePATH = 'encoded_image.png'
-
-# The initial position of the color code that the encryption starts. Defaults to (0,0)
-initial_colorCode = (3, 7)
-
-# Each bit of the message is encrypted with a given step size. Defaults to 1
-step_size = 64
-
-
-#---------- RUNNING THE PROGRAM ----------#
-
-# run_encryption(secret_message, original_imagePATH, encrypted_imagePATH,
-#                initial_colorCode, step_size)
-
-run_decryption(encrypted_imagePATH, initial_colorCode, step_size)
+    print('Starting Steganography Decryption Process...')
+    print('-'*10)
+    print('Printing the result...')
+    print('='*10)
+    try:
+        print(decryptMessage(encrypted_imagePATH, initial_colorCode, step_size))
+        print('='*10)
+        print('Decryption is successful!')
+    except:
+        print('Something went wrong!')
