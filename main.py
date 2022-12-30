@@ -1,8 +1,8 @@
 from math import floor
+from PIL import Image
+from time import sleep
 
 import numpy as np
-from PIL import Image
-
 
 # ---------- HELPFUL FUNCTIONS ----------
 
@@ -174,8 +174,9 @@ def run_encryption(message, original_imagePATH, encrypted_imagePATH, initial_col
     max_char_num = floor(pixel_num / 3)
     messageLength = len(message)
 
-    print('Starting Steganography Encryption Process...')
+    print('Starting the encryption process...')
     print('-'*10)
+    sleep(1)
     print('Pixel number: {}'.format(pixel_num))
     print('Maximum characters/bytes that can be stored in the image: {}'.format(max_char_num))
     print('Length of the message: {}'.format(messageLength))
@@ -198,9 +199,11 @@ def run_decryption(encrypted_imagePATH, initial_colorCode=(0, 0), step_size=1):
         step_size [int, optional]: Each bit in the message is encrypted in a color byte with a distance,
         given by the step size. Defaults to 1
     """
-    print('Starting Steganography Decryption Process...')
+    print('Starting the decryption process...')
+    sleep(1)
     print('-'*10)
     print('Printing the result...')
+    sleep(1)
     print('='*10)
     try:
         print(decryptMessage(encrypted_imagePATH, initial_colorCode, step_size))

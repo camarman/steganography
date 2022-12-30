@@ -1,6 +1,6 @@
 # Steganography
 
-Implementing steganography algorithm that can encrypt and decrypt messages inside an image. Additional to the usual algorithm, I have implement two special arguments.
+Implementing the steganography algorithm that can encrypt and decrypt messages inside an image. Additional to the usual algorithm, I have added two special arguments.
 
 `initial_colorCode`: The initial position of the color code that the encryption starts. Defaults to (0,0)
 
