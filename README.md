@@ -6,7 +6,7 @@ Implementing a steganography algorithm that can hide messages inside an image. A
 
 `step_size`: Each bit of the message is encrypted with a given step size. Defaults to 1
 
-Furthermore, the program also prints out the *number of pixels* and *maximum characters/bytes that can be stored in the image*.
+Furthermore, the program also prints out the *number of pixels* and *maximum characters/bytes that can be stored* in the image.
 
 ## Running the program
 
