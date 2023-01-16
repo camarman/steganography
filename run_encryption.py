@@ -3,9 +3,8 @@ from main import run_encryption
 # ---------- INPUTS ----------
 
 # The message that needs to be encrypted
-secret_message = '''If there is a time
-I'll know it...and if there is a god,
-I'll see it'''
+secret_message = '''You discover that home is not a person or a place
+But a feeling you can't get back'''
 
 # Full or relative path of the original image
 original_imagePATH = 'image.jpg'
