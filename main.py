@@ -4,7 +4,7 @@ from time import sleep
 
 import numpy as np
 
-# ---------- HELPFUL FUNCTIONS ----------
+# ========== HELPFUL FUNCTIONS ==========
 
 def add_leading_zero(byte):
     """
@@ -76,7 +76,7 @@ def encodeMessage(message):
     return binaryMessage, len(binaryMessage)
 
 
-# ---------- MAIN FUNCTIONS ----------
+# ========== MAIN FUNCTIONS ==========
 
 def encryptMessage(message, original_imagePATH, encrypted_imagePATH, initial_colorCode, step_size):
     """
@@ -147,12 +147,11 @@ def decryptMessage(encrypted_imagePATH, initial_colorCode, step_size):
                 binaryMessage += ','
         step_counter += step_size
         bitCounter += 1
-    decrypted_message = ''.join([chr(int(i, 2))
-                                for i in binaryMessage.split(',')])
+    decrypted_message = ''.join([chr(int(i, 2)) for i in binaryMessage.split(',')])
     return decrypted_message
 
 
-# ---------- RUNNING FUNCTIONS ----------
+# ========== RUNNING FUNCTIONS ==========
 
 def run_encryption(message, original_imagePATH, encrypted_imagePATH, initial_colorCode=(0, 0), step_size=1):
     """
@@ -169,8 +168,7 @@ def run_encryption(message, original_imagePATH, encrypted_imagePATH, initial_col
         step_size [int, optional]: Each bit in the message is encrypted in a color byte with a distance,
         given by the step size. Defaults to 1
     """
-    pixel_num = image_size(original_imagePATH)[
-        0] * image_size(original_imagePATH)[1]
+    pixel_num = image_size(original_imagePATH)[0]*image_size(original_imagePATH)[1]
     max_char_num = floor(pixel_num / 3)
     messageLength = len(message)
 
@@ -181,8 +179,7 @@ def run_encryption(message, original_imagePATH, encrypted_imagePATH, initial_col
     print('Maximum characters/bytes that can be stored in the image: {}'.format(max_char_num))
     print('Length of the message: {}'.format(messageLength))
     print('-'*10)
-    encryptMessage(message, original_imagePATH,
-                   encrypted_imagePATH, initial_colorCode, step_size)
+    encryptMessage(message, original_imagePATH, encrypted_imagePATH, initial_colorCode, step_size)
     print('Encryption is successful!')
 
 

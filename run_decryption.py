@@ -1,6 +1,6 @@
 from main import run_decryption
 
-# ---------- INPUTS ----------
+# ========== INPUTS ==========
 
 # Full or relative path of the image, in which the message is hidden
 # Note that .jpg does not work as the path of the encrypted image
@@ -12,6 +12,6 @@ initial_colorCode = (0, 0)
 # Each bit of the message is encrypted with a given step size. Defaults to 1
 step_size = 1
 
-# ---------- RUNNING THE PROGRAM ----------
+# ========== RUNNING THE PROGRAM ==========
 
 run_decryption(encrypted_imagePATH, initial_colorCode, step_size)
