@@ -1,8 +1,8 @@
+import numpy as np
+
 from math import floor
 from PIL import Image
 from time import sleep
-
-import numpy as np
 
 # ========== HELPFUL FUNCTIONS ==========
 
