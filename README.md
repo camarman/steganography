@@ -10,9 +10,9 @@ Furthermore, the program also prints out the *number of pixels* and *maximum cha
 
 ## Running the program
 
-You can install the requirements via
+You can install the requirements by running
 
-    python3 -m pip install -r requirements.txt
+    python3 -m pip install numpy Pillow
 
 In order to start the encryption process go to `run_encryption.py` and adjust the given arguments. After that you can run the program by typing
 
