@@ -8,16 +8,16 @@ Implementing a steganography algorithm that can hide messages inside an image. A
 
 Furthermore, the program also prints out the *number of pixels* and *maximum characters/bytes that can be stored* in the image.
 
-## Running the program
+## User Guide
 
 You can install the requirements by running
 
     python3 -m pip install numpy Pillow
 
-In order to start the encryption process go to `run_encryption.py` and adjust the given arguments. After that you can run the program by typing
+In order to start the encryption process go to `run_encryption.py` and adjust the given arguments. After that you can run the program via
 
     python3 run_encryption.py
 
-Similarly, to start the decryption process, fill the arguments in the `run_decryption.py` and run the program by typing
+Similarly, to start the decryption process, fill the arguments in the `run_decryption.py` and run the program via
 
     python3 run_decryption.py
