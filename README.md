@@ -2,9 +2,9 @@
 
 Implementing a steganography algorithm that can hide messages inside an image. Additional to the usual algorithm, I have added two special arguments:
 
-`initial_colorCode`: The initial position of the color code that the encryption starts. Defaults to (0,0)
+`initial_colorCode`: The initial position of the color code that the encryption starts. Defaults to `(0,0)`
 
-`step_size`: Each bit of the message is encrypted with a given step size. Defaults to 1
+`step_size`: Each bit of the message is encrypted with a given step size. Defaults to `1`
 
 Furthermore, the program also prints out the *number of pixels* and *maximum characters/bytes that can be stored* in the image.
 
