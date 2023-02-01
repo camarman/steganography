@@ -14,10 +14,10 @@ You can install the requirements by running
 
     python3 -m pip install numpy Pillow
 
-In order to start the encryption process go to `run_encryption.py` and adjust the given arguments. After that you can run the program via
+To start the encryption process, go to `run_encryption.py` and adjust the given arguments. After that, you can run the program via
 
     python3 run_encryption.py
 
-Similarly, to start the decryption process, fill the arguments in the `run_decryption.py` and run the program via
+Similarly, to start the decryption process, fill in the arguments in `run_decryption.py` and run the program via
 
     python3 run_decryption.py
